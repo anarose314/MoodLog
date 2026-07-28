@@ -1,0 +1,26 @@
+@theme {
+  --color-*: initial;
+
+  --color-black: #000000;
+  --color-white: #ffffff;
+
+  --color-gray-300: #9fa6b2;
+  --color-gray-200: #d9d9d9;
+  --color-gray-100: #eeeeee;
+
+  --color-primary-500: #3cc7c6;
+
+  --color-purple: #a932ff;
+  --color-blue: #01b4bb;
+  --color-yellow: #f5d51e;
+  --color-orange: #fb8926;
+  --color-pink: #fc7b8f;
+
+  --color-error: #d6173a;
+  --color-warning: #ffc021;
+  --color-info: #2f86eb;
+
+  /* Box Shadows */
+  --shadow-lg: 0 4px 6px 0 rgb(0 0 0 / 0.05);
+  --shadow-dropdown: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
+}
