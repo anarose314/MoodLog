@@ -1,26 +1,25 @@
 @theme {
   --color-*: initial;
 
-  --color-background: #f6f6f6;
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f6f6f6;
+  --color-gray-200: #e5e5e5;
+  --color-gray-300: #d4d4d4;
+  --color-gray-400: #a3a3a3;
+  --color-gray-500: #737373;
+  --color-gray-600: #525252;
+  --color-gray-700: #404040;
+  --color-gray-800: #262626;
+  --color-gray-900: #171717;
+  --color-gray-950: #0a0a0a;
 
   --color-black: #000000;
   --color-white: #ffffff;
 
-  --color-gray-300: #9fa6b2;
-  --color-gray-200: #d9d9d9;
-  --color-gray-100: #eeeeee;
+  --color-background: var(--color-gray-100);
 
-  --color-primary-500: #3cc7c6;
-
-  --color-purple: #a932ff;
-  --color-blue: #01b4bb;
-  --color-yellow: #f5d51e;
-  --color-orange: #fb8926;
-  --color-pink: #fc7b8f;
-
-  --color-error: #d6173a;
-  --color-warning: #ffc021;
-  --color-info: #2f86eb;
+  --color-green: #64c964;
+  --color-red: #fd565f;
 
   /* Box Shadows */
   --shadow-box: 0 0 29px 0 rgb(0 0 0 / 0.2);
