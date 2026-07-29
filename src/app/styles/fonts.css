@@ -1,5 +1,29 @@
+@font-face {
+  font-family: 'PpObBat';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2507-1@1.0/printingboxLight.woff2')
+    format('woff2');
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PpObBat';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2507-1@1.0/printingboxMedium.woff2')
+    format('woff2');
+  font-weight: 500;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PpObBat';
+  src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/2507-1@1.0/printingboxBold.woff2')
+    format('woff2');
+  font-weight: 600;
+  font-display: swap;
+}
+
 @theme {
-  --font-sans: 'Pretendard Variable', 'Pretendard', sans-serif;
+  --font-sans: 'PpObBat', sans-serif;
 
   --text-2xs: 0.625rem; /* 10px */
 
