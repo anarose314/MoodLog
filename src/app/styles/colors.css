@@ -1,6 +1,8 @@
 @theme {
   --color-*: initial;
 
+  --color-background: #f6f6f6;
+
   --color-black: #000000;
   --color-white: #ffffff;
 
@@ -21,6 +23,5 @@
   --color-info: #2f86eb;
 
   /* Box Shadows */
-  --shadow-lg: 0 4px 6px 0 rgb(0 0 0 / 0.05);
-  --shadow-dropdown: 0 4px 20px 0 rgba(0, 0, 0, 0.08);
+  --shadow-box: 0 0 29px 0 rgb(0 0 0 / 0.2);
 }
