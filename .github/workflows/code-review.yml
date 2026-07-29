@@ -30,7 +30,8 @@ jobs:
         uses: Codium-ai/pr-agent@main
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GOOGLE_API_KEY }}
+          OPENAI_KEY: ${{ secrets.GEMINI_API_KEY }}
+          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
           # Gemini 모델 사용 명시
           PR_AGENT.CONFIG.MODEL: 'gemini/gemini-1.5-flash'
