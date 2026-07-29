@@ -1,34 +1,37 @@
-name: Gemini AI Code Reviewer
+name: Gemini PR Agent
 
+# 1. PR 오픈/수정 시 자동 실행 & 댓글 작성 시 수동 실행 모두 켜기
 on:
+  pull_request:
+    types: [opened, synchronize]
   issue_comment:
     types: [created]
 
 permissions:
   pull-requests: write
+  issues: write
   contents: read
 
 jobs:
-  gemini-code-review:
+  pr_agent_job:
     runs-on: ubuntu-latest
-    # PR 창에 달린 댓글이고, 내용에 '/gemini-review'가 포함되어 있을 때만 실행
-    if: >
-      github.event.issue.pull_request && contains(github.event.comment.body, '/gemini-review')
+    # 무한 루프 방지 (봇이 단 댓글에는 반응하지 않음)
+    if: ${{ github.event.sender.type != 'Bot' }}
     steps:
       - name: Checkout Repo
         uses: actions/checkout@v3
-        with:
-          fetch-depth: 0
 
-      - name: Gemini Code Review
-        uses: truongnh1992/gemini-ai-code-reviewer@main
-        with:
+      - name: Run CodiumAI PR Agent
+        uses: Codium-ai/pr-agent@main
+        env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          GEMINI_API_KEY: ${{ secrets.GEMINI_API_KEY }}
-          GEMINI_MODEL: gemini-2.5-flash
-          EXCLUDE: 'node_modules/**,.next/**,out/**,build/**,dist/**,package-lock.json,yarn.lock,pnpm-lock.yaml,public/**'
+          GOOGLE_API_KEY: ${{ secrets.GEMINI_API_KEY }}
 
-          SYSTEM_MESSAGE: |
+          # Gemini 모델 사용 명시
+          PR_AGENT.CONFIG.MODEL: 'gemini/gemini-1.5-flash'
+          PR_AGENT.CONFIG.FALLBACK_MODELS: 'gemini/gemini-1.5-flash'
+
+          PR_AGENT.PR_REVIEWER.EXTRA_INSTRUCTIONS: >-
             당신은 React 및 Next.js 프로젝트의 시니어 프론트엔드 개발자입니다. 
             단순한 지적보다 '왜' 개선해야 하는지 이유와 더 나은 대안 코드를 함께 제시해 주세요.
             모든 답변은 한국어(ko-KR)로 작성하세요.
