@@ -1,4 +1,4 @@
-export default function NotFound() {
+export default function NotFoundPage() {
   return (
     <>
       <div className="">잘못된 페이지입니다.</div>

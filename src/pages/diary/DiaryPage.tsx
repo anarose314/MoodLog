@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 
-export default function Diary() {
+export default function DiaryPage() {
   const parmas = useParams();
 
   return (
