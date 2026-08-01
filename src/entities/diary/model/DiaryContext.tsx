@@ -1,6 +1,14 @@
-import { type Reducer, useReducer, useRef } from 'react';
+/* eslint-disable react-refresh/only-export-components */
+import {
+  createContext,
+  type ReactNode,
+  type Reducer,
+  useContext,
+  useReducer,
+  useRef,
+} from 'react';
 import { MOCK_DATA } from './diaryMock';
-import type { Action, Diary } from './types';
+import type { Action, Diary, DiaryActions } from './types';
 
 const diaryReducer: Reducer<Diary[], Action> = (state, action) => {
   switch (action.type) {
@@ -17,7 +25,18 @@ const diaryReducer: Reducer<Diary[], Action> = (state, action) => {
   }
 };
 
-export function DiaryProvider() {
+const DiaryStateContext = createContext<Diary[] | null>(null);
+const DiaryActionsContext = createContext<DiaryActions | null>(null);
+
+/**
+ * 일기장 전역 상태를 제공하는 Provider 컴포넌트
+ *
+ * @example
+ * <DiaryProvider>
+ *   <Component />
+ * </DiaryProvider>
+ */
+export function DiaryProvider({ children }: { children: ReactNode }) {
   const [diaryList, diaryDispatch] = useReducer(diaryReducer, MOCK_DATA);
   const idRef = useRef(MOCK_DATA.length + 1);
 
@@ -48,5 +67,27 @@ export function DiaryProvider() {
     });
   };
 
-  return <div></div>;
+  return (
+    <DiaryStateContext.Provider value={diaryList}>
+      <DiaryActionsContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+        {children}
+      </DiaryActionsContext.Provider>
+    </DiaryStateContext.Provider>
+  );
+}
+
+export function useDiaryState() {
+  const context = useContext(DiaryStateContext);
+  if (!context) {
+    throw new Error('DiaryProvider 안에서만 사용할 수 있습니다.');
+  }
+  return context;
+}
+
+export function useDiaryActions() {
+  const context = useContext(DiaryActionsContext);
+  if (!context) {
+    throw new Error('DiaryProvider 안에서만 사용할 수 있습니다.');
+  }
+  return context;
 }
