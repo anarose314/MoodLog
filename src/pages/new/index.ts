@@ -1,1 +1,1 @@
-export { default as NewPage } from './NewPage';
+export { default as NewPage } from './ui/NewPage';

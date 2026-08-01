@@ -1,1 +1,1 @@
-export { default as DiaryPage } from './DiaryPage';
+export { default as DiaryPage } from './ui/DiaryPage';
