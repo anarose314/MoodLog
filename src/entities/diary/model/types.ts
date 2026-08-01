@@ -4,3 +4,8 @@ export interface Diary {
   emotionId: number;
   content: string;
 }
+
+export type Action =
+  | { type: 'CREATE'; data: Diary }
+  | { type: 'UPDATE'; data: Diary }
+  | { type: 'DELETE'; id: number };
