@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import { DiaryPage } from '@/pages/diary';
+import { EditPage } from '@/pages/edit';
 import { HomePage } from '@/pages/home';
 import { NewPage } from '@/pages/new';
 import { NotFoundPage } from '@/pages/not-found';
@@ -13,6 +14,7 @@ export default function Router() {
           <Route path="/" element={<HomePage />} />
           <Route path="/new" element={<NewPage />} />
           <Route path="/diary/:id" element={<DiaryPage />} />
+          <Route path="/edit/:id" element={<EditPage />} />
           <Route path="*" element={<NotFoundPage />} />
         </Route>
       </Routes>
