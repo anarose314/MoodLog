@@ -38,7 +38,7 @@ const DiaryActionsContext = createContext<DiaryActions | null>(null);
  */
 export function DiaryProvider({ children }: { children: ReactNode }) {
   const [diaryList, diaryDispatch] = useReducer(diaryReducer, MOCK_DATA);
-  const idRef = useRef(MOCK_DATA.length + 1);
+  const idRef = useRef(Math.max(...MOCK_DATA.map((item) => item.id), 0) + 1);
 
   // 새로운 일기 추가
   const onCreate = (data: Omit<Diary, 'id'>) => {
