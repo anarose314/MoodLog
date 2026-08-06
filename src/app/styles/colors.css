@@ -21,6 +21,12 @@
   --color-green: #64c964;
   --color-red: #fd565f;
 
+  --color-emotion1: rgb(100, 201, 100);
+  --color-emotion2: rgb(157, 215, 114);
+  --color-emotion3: rgb(253, 206, 23);
+  --color-emotion4: rgb(253, 132, 70);
+  --color-emotion5: rgb(253, 86, 95);
+
   /* Box Shadows */
   --shadow-box: 0 0 29px 0 rgb(0 0 0 / 0.2);
 }
