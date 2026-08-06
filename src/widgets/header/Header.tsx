@@ -6,10 +6,10 @@ export default function Header() {
   const title = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`;
 
   const handleDecreaseMonth = () => {
-    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() - 1));
+    setPivotDate((prev) => new Date(prev.getFullYear(), prev.getMonth() - 1));
   };
   const handleIncreaseMonth = () => {
-    setPivotDate(new Date(pivotDate.getFullYear(), pivotDate.getMonth() + 1));
+    setPivotDate((prev) => new Date(prev.getFullYear(), prev.getMonth() + 1));
   };
 
   return (
