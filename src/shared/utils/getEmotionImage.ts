@@ -1,6 +1,6 @@
 import { emotion1, emotion2, emotion3, emotion4, emotion5 } from '@/assets';
 
-type EmotionId = 1 | 2 | 3 | 4 | 5;
+export type EmotionId = 1 | 2 | 3 | 4 | 5;
 
 const EMOTION_IMAGES: Record<EmotionId, string> = {
   1: emotion1,
