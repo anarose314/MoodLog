@@ -1,5 +1,6 @@
 import type { ButtonHTMLAttributes } from 'react';
 import { cva } from 'class-variance-authority';
+import { cn } from '../utils/cn';
 
 type ButtonType = 'DEFAULT' | 'POSITIVE' | 'NEGATIVE';
 
@@ -31,10 +32,15 @@ export default function Button({
   children,
   variant,
   type = 'button',
+  className,
   ...props
 }: ButtonProps) {
   return (
-    <button type={type} className={ButtonVariants({ variant })} {...props}>
+    <button
+      type={type}
+      className={cn(ButtonVariants({ variant }), className)}
+      {...props}
+    >
       {children}
     </button>
   );
