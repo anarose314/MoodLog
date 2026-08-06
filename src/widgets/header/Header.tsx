@@ -6,7 +6,7 @@ interface HeaderProps {
 
 export default function Header({ title }: HeaderProps) {
   return (
-    <header className="border-b border-b-gray-300 py-5">
+    <header className="mb-5 border-b border-b-gray-300 py-5">
       <ul className="flex w-full items-center justify-between">
         <li>
           <Button>&lt;</Button>
