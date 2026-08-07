@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { cva } from 'class-variance-authority';
 import type { Diary } from '@/entities/diary';
 import Button from '@/shared/ui/Button';
@@ -26,24 +27,29 @@ interface DiaryItemProps {
 }
 
 export default function DiaryItem({ item }: DiaryItemProps) {
-  const { emotionId, content, createdDate } = item;
-  const id = getEmotionImage(emotionId);
+  const { id, emotionId, content, createdDate } = item;
+  const emotionImg = getEmotionImage(emotionId);
   const date = new Date(createdDate).toLocaleDateString('ko-KR');
+  const nav = useNavigate();
 
   return (
-    <article className="flex justify-between gap-3 border-b py-3.75">
-      {id && (
-        <div className={emotionIdVariants({ emotionId })}>
-          <img src={id} alt="" className="h-full" />
-        </div>
+    <article className="flex items-center justify-between gap-3 border-b py-3.75">
+      {emotionImg && (
+        <button
+          className={emotionIdVariants({ emotionId })}
+          onClick={() => nav(`diary/${id}`)}
+        >
+          <img src={emotionImg} alt="" className="h-full" />
+        </button>
       )}
-      <div className="flex-1">
+      <button
+        className="flex flex-1 cursor-pointer flex-col self-stretch bg-black/30 text-left"
+        onClick={() => nav(`diary/${id}`)}
+      >
         <p className="typo-2xl-bold">{date}</p>
         <p className="typo-2lg-medium">{content}</p>
-      </div>
-      <div className="">
-        <Button>수정하기</Button>
-      </div>
+      </button>
+      <Button onClick={() => nav(`edit/${id}`)}>수정하기</Button>
     </article>
   );
 }
