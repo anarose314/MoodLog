@@ -1,7 +1,42 @@
+import type { Diary } from '@/entities/diary';
+import {
+  useDateState,
+  useDiaryState,
+} from '@/entities/diary/model/DiaryContext';
 import { DiaryItem } from '@/features/diary-item';
 import Button from '@/shared/ui/Button';
 
+const getMonthlyData = (pivotDate: Date, data: Diary[]) => {
+  const startDate = new Date(
+    pivotDate.getFullYear(),
+    pivotDate.getMonth(),
+    1,
+    0,
+    0,
+    0,
+    0
+  ).getTime();
+
+  const endDate = new Date(
+    pivotDate.getFullYear(),
+    pivotDate.getMonth() + 1,
+    0,
+    23,
+    59,
+    59,
+    59
+  ).getTime();
+
+  return data.filter(
+    (item) => startDate <= item.createdDate && endDate >= item.createdDate
+  );
+};
+
 export default function DiaryList() {
+  const { pivotDate } = useDateState();
+  const data = useDiaryState();
+  const filteredData = getMonthlyData(pivotDate, data);
+
   return (
     <>
       <div className="flex gap-3">
@@ -19,21 +54,11 @@ export default function DiaryList() {
         </Button>
       </div>
       <ul>
-        <li>
-          <DiaryItem emotionId={1} />
-        </li>
-        <li>
-          <DiaryItem emotionId={2} />
-        </li>
-        <li>
-          <DiaryItem emotionId={3} />
-        </li>
-        <li>
-          <DiaryItem emotionId={4} />
-        </li>
-        <li>
-          <DiaryItem emotionId={5} />
-        </li>
+        {filteredData.map((item) => (
+          <li>
+            <DiaryItem item={item} />
+          </li>
+        ))}
       </ul>
     </>
   );

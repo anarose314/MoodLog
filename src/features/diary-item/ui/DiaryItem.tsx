@@ -1,9 +1,7 @@
 import { cva } from 'class-variance-authority';
+import type { Diary } from '@/entities/diary';
 import Button from '@/shared/ui/Button';
-import {
-  type EmotionId,
-  getEmotionImage,
-} from '@/shared/utils/getEmotionImage';
+import { getEmotionImage } from '@/shared/utils/getEmotionImage';
 
 const emotionIdVariants = cva(
   'flex h-20 min-w-30 cursor-pointer items-center justify-center overflow-hidden rounded-sm transition-opacity hover:opacity-80',
@@ -24,11 +22,13 @@ const emotionIdVariants = cva(
 );
 
 interface DiaryItemProps {
-  emotionId: EmotionId;
+  item: Diary;
 }
 
-export default function DiaryItem({ emotionId }: DiaryItemProps) {
+export default function DiaryItem({ item }: DiaryItemProps) {
+  const { emotionId, content, createdDate } = item;
   const id = getEmotionImage(emotionId);
+  const date = new Date(createdDate).toLocaleDateString('ko-KR');
 
   return (
     <article className="flex justify-between gap-3 border-b py-3.75">
@@ -38,8 +38,8 @@ export default function DiaryItem({ emotionId }: DiaryItemProps) {
         </div>
       )}
       <div className="flex-1">
-        <p className="typo-2xl-bold">{new Date().toLocaleDateString()}</p>
-        <p className="typo-2lg-medium">일기 컨텐츠</p>
+        <p className="typo-2xl-bold">{date}</p>
+        <p className="typo-2lg-medium">{content}</p>
       </div>
       <div className="">
         <Button>수정하기</Button>
