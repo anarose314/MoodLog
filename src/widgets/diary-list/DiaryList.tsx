@@ -29,7 +29,7 @@ export default function DiaryList() {
       </div>
       <ul>
         {filteredData.map((item) => (
-          <li>
+          <li key={item.id}>
             <DiaryItem item={item} />
           </li>
         ))}
