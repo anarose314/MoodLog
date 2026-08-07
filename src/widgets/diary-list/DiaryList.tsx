@@ -1,36 +1,10 @@
-import type { Diary } from '@/entities/diary';
+import { getMonthlyData } from '@/entities/diary';
 import {
   useDateState,
   useDiaryState,
 } from '@/entities/diary/model/DiaryContext';
 import { DiaryItem } from '@/features/diary-item';
 import Button from '@/shared/ui/Button';
-
-const getMonthlyData = (pivotDate: Date, data: Diary[]) => {
-  const startDate = new Date(
-    pivotDate.getFullYear(),
-    pivotDate.getMonth(),
-    1,
-    0,
-    0,
-    0,
-    0
-  ).getTime();
-
-  const endDate = new Date(
-    pivotDate.getFullYear(),
-    pivotDate.getMonth() + 1,
-    0,
-    23,
-    59,
-    59,
-    59
-  ).getTime();
-
-  return data.filter(
-    (item) => startDate <= item.createdDate && endDate >= item.createdDate
-  );
-};
 
 export default function DiaryList() {
   const { pivotDate } = useDateState();
