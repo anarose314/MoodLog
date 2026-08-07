@@ -6,9 +6,10 @@ import {
   useContext,
   useReducer,
   useRef,
+  useState,
 } from 'react';
 import { MOCK_DATA } from './diaryMock';
-import type { Action, Diary, DiaryActions } from './types';
+import type { Action, DateContextType, Diary, DiaryActions } from './types';
 
 const diaryReducer: Reducer<Diary[], Action> = (state, action) => {
   switch (action.type) {
@@ -25,6 +26,7 @@ const diaryReducer: Reducer<Diary[], Action> = (state, action) => {
   }
 };
 
+const DateContext = createContext<DateContextType | null>(null);
 const DiaryStateContext = createContext<Diary[] | null>(null);
 const DiaryActionsContext = createContext<DiaryActions | null>(null);
 
@@ -37,6 +39,7 @@ const DiaryActionsContext = createContext<DiaryActions | null>(null);
  * </DiaryProvider>
  */
 export function DiaryProvider({ children }: { children: ReactNode }) {
+  const [pivotDate, setPivotDate] = useState(new Date());
   const [diaryList, diaryDispatch] = useReducer(diaryReducer, MOCK_DATA);
   const idRef = useRef(Math.max(...MOCK_DATA.map((item) => item.id), 0) + 1);
 
@@ -68,12 +71,22 @@ export function DiaryProvider({ children }: { children: ReactNode }) {
   };
 
   return (
-    <DiaryStateContext.Provider value={diaryList}>
-      <DiaryActionsContext.Provider value={{ onCreate, onUpdate, onDelete }}>
-        {children}
-      </DiaryActionsContext.Provider>
-    </DiaryStateContext.Provider>
+    <DateContext.Provider value={{ pivotDate, setPivotDate }}>
+      <DiaryStateContext.Provider value={diaryList}>
+        <DiaryActionsContext.Provider value={{ onCreate, onUpdate, onDelete }}>
+          {children}
+        </DiaryActionsContext.Provider>
+      </DiaryStateContext.Provider>
+    </DateContext.Provider>
   );
+}
+
+export function useDateState() {
+  const context = useContext(DateContext);
+  if (!context) {
+    throw new Error('DiaryProvider 안에서만 사용할 수 있습니다.');
+  }
+  return context;
 }
 
 export function useDiaryState() {
