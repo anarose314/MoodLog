@@ -43,7 +43,7 @@ export default function DiaryItem({ item }: DiaryItemProps) {
         </button>
       )}
       <button
-        className="flex flex-1 cursor-pointer flex-col self-stretch bg-black/30 text-left"
+        className="flex flex-1 cursor-pointer flex-col self-stretch text-left"
         onClick={() => nav(`diary/${id}`)}
       >
         <p className="typo-2xl-bold">{date}</p>
