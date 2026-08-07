@@ -1,8 +1,8 @@
-import { useState } from 'react';
+import { useDateState } from '@/entities/diary/model/DiaryContext';
 import Button from '@/shared/ui/Button';
 
 export default function Header() {
-  const [pivotDate, setPivotDate] = useState(new Date());
+  const { pivotDate, setPivotDate } = useDateState();
   const title = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`;
 
   const handleDecreaseMonth = () => {
