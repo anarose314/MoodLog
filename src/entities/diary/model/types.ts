@@ -1,7 +1,10 @@
+import type { Dispatch, SetStateAction } from 'react';
+import type { EmotionId } from '@/shared/utils/getEmotionImage';
+
 export interface Diary {
   id: number;
   createdDate: number;
-  emotionId: number;
+  emotionId: EmotionId;
   content: string;
 }
 
@@ -14,4 +17,9 @@ export interface DiaryActions {
   onCreate: (newDiaryData: Omit<Diary, 'id'>) => void;
   onUpdate: (editDiaryData: Diary) => void;
   onDelete: (removeId: number) => void;
+}
+
+export interface DateContextType {
+  pivotDate: Date;
+  setPivotDate: Dispatch<SetStateAction<Date>>;
 }

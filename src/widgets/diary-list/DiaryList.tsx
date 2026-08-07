@@ -1,7 +1,16 @@
+import { getMonthlyData } from '@/entities/diary';
+import {
+  useDateState,
+  useDiaryState,
+} from '@/entities/diary/model/DiaryContext';
 import { DiaryItem } from '@/features/diary-item';
 import Button from '@/shared/ui/Button';
 
 export default function DiaryList() {
+  const { pivotDate } = useDateState();
+  const data = useDiaryState();
+  const filteredData = getMonthlyData(pivotDate, data);
+
   return (
     <>
       <div className="flex gap-3">
@@ -19,21 +28,11 @@ export default function DiaryList() {
         </Button>
       </div>
       <ul>
-        <li>
-          <DiaryItem emotionId={1} />
-        </li>
-        <li>
-          <DiaryItem emotionId={2} />
-        </li>
-        <li>
-          <DiaryItem emotionId={3} />
-        </li>
-        <li>
-          <DiaryItem emotionId={4} />
-        </li>
-        <li>
-          <DiaryItem emotionId={5} />
-        </li>
+        {filteredData.map((item) => (
+          <li key={item.id}>
+            <DiaryItem item={item} />
+          </li>
+        ))}
       </ul>
     </>
   );
