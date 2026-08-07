@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { cva } from 'class-variance-authority';
 import type { Diary } from '@/entities/diary';
 import Button from '@/shared/ui/Button';
@@ -26,23 +27,27 @@ interface DiaryItemProps {
 }
 
 export default function DiaryItem({ item }: DiaryItemProps) {
-  const { emotionId, content, createdDate } = item;
+  const { id, emotionId, content, createdDate } = item;
   const emotionImg = getEmotionImage(emotionId);
   const date = new Date(createdDate).toLocaleDateString('ko-KR');
+  const nav = useNavigate();
 
   return (
     <article className="flex justify-between gap-3 border-b py-3.75">
       {emotionImg && (
-        <div className={emotionIdVariants({ emotionId })}>
+        <div
+          className={emotionIdVariants({ emotionId })}
+          onClick={() => nav(`diary/${id}`)}
+        >
           <img src={emotionImg} alt="" className="h-full" />
         </div>
       )}
-      <div className="flex-1">
+      <div className="flex-1 cursor-pointer" onClick={() => nav(`diary/${id}`)}>
         <p className="typo-2xl-bold">{date}</p>
         <p className="typo-2lg-medium">{content}</p>
       </div>
       <div className="">
-        <Button>수정하기</Button>
+        <Button onClick={() => nav(`edit/${id}`)}>수정하기</Button>
       </div>
     </article>
   );
