@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import { getMonthlyData } from '@/entities/diary';
 import {
   useDateState,
@@ -10,6 +11,7 @@ export default function DiaryList() {
   const { pivotDate } = useDateState();
   const data = useDiaryState();
   const filteredData = getMonthlyData(pivotDate, data);
+  const nav = useNavigate();
 
   return (
     <>
@@ -23,7 +25,7 @@ export default function DiaryList() {
           <option value="latest">최신순</option>
           <option value="oldest">오래된순</option>
         </select>
-        <Button variant="POSITIVE" className="grow">
+        <Button variant="POSITIVE" className="grow" onClick={() => nav('new')}>
           새 일기 쓰기
         </Button>
       </div>
