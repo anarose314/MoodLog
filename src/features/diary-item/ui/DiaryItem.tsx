@@ -33,22 +33,23 @@ export default function DiaryItem({ item }: DiaryItemProps) {
   const nav = useNavigate();
 
   return (
-    <article className="flex justify-between gap-3 border-b py-3.75">
+    <article className="flex items-center justify-between gap-3 border-b py-3.75">
       {emotionImg && (
-        <div
+        <button
           className={emotionIdVariants({ emotionId })}
           onClick={() => nav(`diary/${id}`)}
         >
           <img src={emotionImg} alt="" className="h-full" />
-        </div>
+        </button>
       )}
-      <div className="flex-1 cursor-pointer" onClick={() => nav(`diary/${id}`)}>
+      <button
+        className="flex flex-1 cursor-pointer flex-col self-stretch bg-black/30 text-left"
+        onClick={() => nav(`diary/${id}`)}
+      >
         <p className="typo-2xl-bold">{date}</p>
         <p className="typo-2lg-medium">{content}</p>
-      </div>
-      <div className="">
-        <Button onClick={() => nav(`edit/${id}`)}>수정하기</Button>
-      </div>
+      </button>
+      <Button onClick={() => nav(`edit/${id}`)}>수정하기</Button>
     </article>
   );
 }
