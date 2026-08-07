@@ -27,14 +27,14 @@ interface DiaryItemProps {
 
 export default function DiaryItem({ item }: DiaryItemProps) {
   const { emotionId, content, createdDate } = item;
-  const id = getEmotionImage(emotionId);
+  const emotionImg = getEmotionImage(emotionId);
   const date = new Date(createdDate).toLocaleDateString('ko-KR');
 
   return (
     <article className="flex justify-between gap-3 border-b py-3.75">
-      {id && (
+      {emotionImg && (
         <div className={emotionIdVariants({ emotionId })}>
-          <img src={id} alt="" className="h-full" />
+          <img src={emotionImg} alt="" className="h-full" />
         </div>
       )}
       <div className="flex-1">
