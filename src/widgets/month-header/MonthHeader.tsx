@@ -1,7 +1,8 @@
 import { useDateState } from '@/entities/diary/model/DiaryContext';
 import Button from '@/shared/ui/Button';
+import Header from '@/shared/ui/Header';
 
-export default function Header() {
+export default function MonthHeader() {
   const { pivotDate, setPivotDate } = useDateState();
   const title = `${pivotDate.getFullYear()}년 ${pivotDate.getMonth() + 1}월`;
 
@@ -13,18 +14,10 @@ export default function Header() {
   };
 
   return (
-    <header className="mb-5 border-b border-b-gray-300 py-5">
-      <ul className="flex w-full items-center justify-between">
-        <li>
-          <Button onClick={handleDecreaseMonth}>&lt;</Button>
-        </li>
-        <li>
-          <p>{title}</p>
-        </li>
-        <li>
-          <Button onClick={handleIncreaseMonth}>&gt;</Button>
-        </li>
-      </ul>
-    </header>
+    <Header
+      title={title}
+      leftChild={<Button onClick={handleDecreaseMonth}>&lt;</Button>}
+      rightChild={<Button onClick={handleIncreaseMonth}>&gt;</Button>}
+    />
   );
 }
