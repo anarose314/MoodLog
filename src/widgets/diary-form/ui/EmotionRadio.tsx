@@ -3,7 +3,7 @@ import { EMOTION_LIST } from '@/shared/constants/emotion';
 import { getEmotionImage } from '@/shared/utils/getEmotionImage';
 
 const emotionIdVariants = cva(
-  'flex cursor-pointer flex-col items-center justify-center gap-1 rounded-md bg-gray-100 py-5',
+  'typo-xs-medium md:typo-lg-medium flex h-full cursor-pointer flex-col items-center justify-center gap-1 rounded-md bg-gray-100 py-5 text-center',
   {
     variants: {
       emotionId: {

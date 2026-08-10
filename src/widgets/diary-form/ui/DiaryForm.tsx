@@ -12,7 +12,7 @@ export default function DiaryForm() {
         <input type="date" className={FORM_STYLE} />
       </FormSection>
       <FormSection title="오늘의 감정">
-        <ul className="flex gap-3">
+        <ul className="grid grid-cols-5 gap-3">
           <EmotionRadio />
         </ul>
       </FormSection>
