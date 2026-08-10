@@ -34,14 +34,12 @@ export default function DiaryItem({ item }: DiaryItemProps) {
 
   return (
     <article className="flex items-center justify-between gap-3 border-b py-3.75">
-      {emotionImg && (
-        <button
-          className={emotionIdVariants({ emotionId })}
-          onClick={() => nav(`diary/${id}`)}
-        >
-          <img src={emotionImg} alt="" className="h-full" />
-        </button>
-      )}
+      <button
+        className={emotionIdVariants({ emotionId })}
+        onClick={() => nav(`diary/${id}`)}
+      >
+        <img src={emotionImg} alt="" className="h-full" />
+      </button>
       <button
         className="flex flex-1 cursor-pointer flex-col self-stretch text-left"
         onClick={() => nav(`diary/${id}`)}

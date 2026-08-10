@@ -11,5 +11,5 @@ const EMOTION_IMAGES: Record<EmotionId, string> = {
 };
 
 export function getEmotionImage(emotionId: number) {
-  return EMOTION_IMAGES[emotionId as EmotionId] || null;
+  return EMOTION_IMAGES[emotionId as EmotionId];
 }
