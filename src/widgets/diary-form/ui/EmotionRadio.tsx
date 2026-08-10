@@ -1,31 +1,6 @@
 import { cva } from 'class-variance-authority';
-import {
-  type EmotionId,
-  getEmotionImage,
-} from '@/shared/utils/getEmotionImage';
-
-const EMOTION_LIST = [
-  {
-    id: 1,
-    text: '완전 좋음',
-  },
-  {
-    id: 2,
-    text: '좋음',
-  },
-  {
-    id: 3,
-    text: '그럭저럭',
-  },
-  {
-    id: 4,
-    text: '나쁨',
-  },
-  {
-    id: 5,
-    text: '끔찍함',
-  },
-];
+import { EMOTION_LIST } from '@/shared/constants/emotion';
+import { getEmotionImage } from '@/shared/utils/getEmotionImage';
 
 const emotionIdVariants = cva(
   'flex cursor-pointer flex-col items-center justify-center gap-1 rounded-md bg-gray-100 py-5',
@@ -48,27 +23,23 @@ const emotionIdVariants = cva(
 export default function EmotionRadio() {
   return (
     <>
-      {EMOTION_LIST.map((emotion) => (
-        <li key={emotion.id}>
+      {EMOTION_LIST.map(({ id, text }) => (
+        <li key={id}>
           <input
             type="radio"
-            id={String(emotion.id)}
+            id={String(id)}
             name="emotion"
-            value={emotion.id}
+            value={id}
             className="peer hidden"
           />
           <label
-            htmlFor={String(emotion.id)}
+            htmlFor={String(id)}
             className={emotionIdVariants({
-              emotionId: emotion.id as EmotionId,
+              emotionId: id,
             })}
           >
-            <img
-              src={getEmotionImage(emotion.id)}
-              alt={emotion.text}
-              className="w-1/2"
-            />
-            <p>{emotion.text}</p>
+            <img src={getEmotionImage(id)} alt={text} className="w-1/2" />
+            <p>{text}</p>
           </label>
         </li>
       ))}
