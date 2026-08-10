@@ -9,7 +9,7 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const ButtonVariants = cva(
-  'typo-2lg-regular cursor-pointer rounded-[5px] border-0 px-5 py-2.5 text-nowrap disabled:cursor-not-allowed',
+  'typo-2lg-regular cursor-pointer rounded-md border-0 px-5 py-2.5 text-nowrap disabled:cursor-not-allowed',
   {
     variants: {
       variant: {
